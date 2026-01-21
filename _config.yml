@@ -1,0 +1,23 @@
+title: "台灣高中小論文競賽作品集"
+description: "Taiwan High School Essay Competition Archive - 收錄特優作品"
+baseurl: ""
+url: "https://high-school-essays.codinglu.tw"
+
+# GitHub Pages settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+safe: true
+incremental: false
+
+# Exclude files from processing
+exclude:
+  - "*.py"
+  - "*.xlsx"
+  - "*.log"
+  - "*.md"
+  - requirements.txt
