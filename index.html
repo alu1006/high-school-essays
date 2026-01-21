@@ -1,300 +1,544 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>台灣高中小論文競賽作品集</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #3B82F6;
+            --primary-light: #60A5FA;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #1E293B;
+            --gray: #64748B;
+            --light: #F1F5F9;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Microsoft YaHei', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
             min-height: 100vh;
+            color: var(--dark);
+            margin: 0;
         }
-        
-        .main-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            max-width: 1200px;
+
+        /* Navigation */
+        .navbar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px 15px 0 0;
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
             text-align: center;
         }
-        
-        .search-section {
-            padding: 30px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
+
         .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #4facfe;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
         }
-        
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input-wrapper {
+            position: relative;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            background: var(--white);
+            font-size: 0.9rem;
+            color: var(--dark);
+            min-width: 150px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Category Pills */
+        .category-pills {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .category-pill {
+            padding: 0.5rem 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 50px;
+            background: var(--white);
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-pill:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .category-pill.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Results Header */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-count {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Essay Cards */
+        .essays-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
         .essay-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #E2E8F0;
         }
-        
+
         .essay-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        
+
+        .essay-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .essay-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.4;
+            flex: 1;
         }
-        
+
+        .category-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .category-tag.資訊類 {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .category-tag.工程技術類 {
+            background: #D1FAE5;
+            color: #047857;
+        }
+
+        .category-tag.商業類 {
+            background: #FEF3C7;
+            color: #B45309;
+        }
+
         .essay-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 10px;
+            gap: 1.5rem;
             font-size: 0.9rem;
-            color: #6c757d;
+            color: var(--gray);
         }
-        
+
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 0.5rem;
         }
-        
-        .category-badge {
-            padding: 5px 12px;
-            border-radius: 20px;
+
+        .meta-item i {
+            color: var(--primary-light);
+            width: 16px;
+        }
+
+        .essay-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .period-badge {
             font-size: 0.8rem;
-            font-weight: bold;
+            color: var(--gray);
+            background: var(--light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
         }
-        
-        .category-資訊類 { background: #e3f2fd; color: #1976d2; }
-        .category-工程技術類 { background: #f3e5f5; color: #7b1fa2; }
-        .category-商業類 { background: #e8f5e8; color: #388e3c; }
-        
-        .pdf-link {
+
+        .pdf-btn {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            color: #dc3545;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: var(--white);
             text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
             font-weight: 500;
+            transition: background 0.2s;
         }
-        
-        .pdf-link:hover {
-            color: #c82333;
-            text-decoration: underline;
+
+        .pdf-btn:hover {
+            background: #2563EB;
+            color: var(--white);
         }
-        
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #6c757d;
-        }
-        
+
+        /* Loading & Empty States */
+        .loading,
         .no-results {
             text-align: center;
-            padding: 50px;
-            color: #6c757d;
+            padding: 4rem 2rem;
+            color: var(--gray);
         }
-        
-        .filter-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+
+        .loading i,
+        .no-results i {
+            font-size: 3rem;
+            color: #CBD5E1;
+            margin-bottom: 1rem;
         }
-        
-        .filter-tab {
-            padding: 8px 16px;
-            border: 2px solid #dee2e6;
-            border-radius: 25px;
-            background: white;
-            color: #6c757d;
-            cursor: pointer;
-            transition: all 0.2s ease;
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
             font-size: 0.9rem;
+            margin-top: 2rem;
         }
-        
-        .filter-tab.active {
-            background: #4facfe;
-            color: white;
-            border-color: #4facfe;
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
         }
-        
-        .essays-container {
-            padding: 0 30px 30px;
-        }
-        
+
+        /* Responsive */
         @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
             .essay-meta {
                 flex-direction: column;
-                gap: 8px;
+                gap: 0.5rem;
             }
-            
-            .main-container {
-                margin: 10px;
-                border-radius: 10px;
-            }
-            
-            .search-section, .essays-container {
-                padding: 20px;
+
+            .essay-header {
+                flex-direction: column;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="container-fluid">
-        <div class="main-container">
-            <!-- Header -->
-            <div class="header">
-                <h1><i class="fas fa-graduation-cap"></i> 台灣高中小論文競賽作品集</h1>
-                <p class="mb-0">Taiwan High School Essay Competition Archive</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            <i class="fas fa-graduation-cap"></i>
+            小論文作品集
+        </a>
+        <div class="nav-links">
+            <a href="#" class="nav-link">首頁</a>
+            <a href="https://github.com/alu1006/high-school-essays" target="_blank" class="nav-link">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">台灣高中<span>小論文競賽</span>作品集</h1>
+        <p class="hero-subtitle">
+            收錄資訊類、商業類、工程技術類特優作品，提供完整 PDF 閱讀連結
+        </p>
+
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="total-essays">-</div>
+                <div class="stat-label">篇作品</div>
             </div>
-            
-            <!-- Search Section -->
-            <div class="search-section">
-                <!-- Statistics -->
-                <div class="stats-cards" id="stats-cards">
-                    <div class="stat-card">
-                        <div class="stat-number" id="total-essays">-</div>
-                        <div>總作品數</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="total-categories">-</div>
-                        <div>競賽類別</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="total-periods">-</div>
-                        <div>競賽期數</div>
-                    </div>
-                </div>
-                
-                <!-- Search Bar -->
-                <div class="row mb-3">
-                    <div class="col-md-8">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                            <input type="text" class="form-control" id="searchInput" 
-                                   placeholder="搜索作品標題、作者、學校...">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" id="periodFilter">
-                            <option value="">所有期數</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <!-- Category Filters -->
-                <div class="filter-tabs" id="category-filters">
-                    <div class="filter-tab active" data-category="">全部類別</div>
-                </div>
+            <div class="stat-item">
+                <div class="stat-number" id="total-categories">3</div>
+                <div class="stat-label">競賽類別</div>
             </div>
-            
-            <!-- Essays Container -->
-            <div class="essays-container">
-                <div class="loading" id="loading">
-                    <i class="fas fa-spinner fa-spin fa-2x"></i>
-                    <p class="mt-2">載入作品資料中...</p>
-                </div>
-                
-                <div id="essays-list" style="display: none;"></div>
-                
-                <div class="no-results" id="no-results" style="display: none;">
-                    <i class="fas fa-search fa-2x"></i>
-                    <p class="mt-2">沒有找到符合條件的作品</p>
-                </div>
+            <div class="stat-item">
+                <div class="stat-number" id="total-periods">-</div>
+                <div class="stat-label">競賽期數</div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="搜尋作品標題、作者、學校、指導老師...">
+            </div>
+
+            <div class="filter-row">
+                <div class="category-pills" id="category-filters">
+                    <div class="category-pill active" data-category="">全部</div>
+                </div>
+
+                <select class="filter-select" id="periodFilter">
+                    <option value="">所有期數</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <div class="results-header">
+            <span class="results-count" id="results-count">載入中...</span>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>載入作品資料中...</p>
+        </div>
+
+        <!-- Essays Grid -->
+        <div class="essays-grid" id="essays-list" style="display: none;"></div>
+
+        <!-- No Results -->
+        <div class="no-results" id="no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>沒有找到符合條件的作品</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            資料來源：<a href="https://www.shs.edu.tw/Customer/Winning/EssayIndex" target="_blank">中學生網站</a>
+            ｜
+            <a href="https://github.com/alu1006/high-school-essays" target="_blank">GitHub</a>
+        </p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let allEssays = [];
         let filteredEssays = [];
-        
-        // Load and display essays
+
         async function loadEssays() {
             try {
                 const response = await fetch('essays_data.json');
                 const data = await response.json();
-                
+
                 allEssays = data.essays;
                 filteredEssays = [...allEssays];
-                
+
                 // Update statistics
                 document.getElementById('total-essays').textContent = data.metadata.total_essays;
-                document.getElementById('total-categories').textContent = Object.keys(data.metadata.categories).length;
                 document.getElementById('total-periods').textContent = data.metadata.periods_covered;
-                
+
                 // Setup filters
                 setupCategoryFilters(data.metadata.categories);
                 setupPeriodFilter();
-                
+
                 // Display essays
                 displayEssays();
-                
+
                 // Hide loading
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('essays-list').style.display = 'block';
-                
+                document.getElementById('essays-list').style.display = 'grid';
+
             } catch (error) {
                 console.error('Error loading essays:', error);
-                document.getElementById('loading').innerHTML = '<p class="text-danger">載入失敗，請稍後再試</p>';
+                document.getElementById('loading').innerHTML = '<p style="color: #EF4444;">載入失敗，請稍後再試</p>';
             }
         }
-        
-        // Setup category filters
+
         function setupCategoryFilters(categories) {
             const container = document.getElementById('category-filters');
-            
-            Object.keys(categories).forEach(category => {
-                const tab = document.createElement('div');
-                tab.className = 'filter-tab';
-                tab.dataset.category = category;
-                tab.textContent = `${category} (${categories[category]})`;
-                tab.onclick = () => filterByCategory(category, tab);
-                container.appendChild(tab);
+
+            Object.entries(categories).forEach(([category, count]) => {
+                const pill = document.createElement('div');
+                pill.className = 'category-pill';
+                pill.dataset.category = category;
+                pill.textContent = `${category} (${count})`;
+                pill.onclick = () => filterByCategory(category, pill);
+                container.appendChild(pill);
             });
         }
-        
-        // Setup period filter
+
         function setupPeriodFilter() {
             const select = document.getElementById('periodFilter');
             const periods = [...new Set(allEssays.map(essay => essay.competition_period))].sort((a, b) => b - a);
-            
+
             periods.forEach(period => {
                 const option = document.createElement('option');
                 option.value = period;
@@ -302,99 +546,99 @@
                 select.appendChild(option);
             });
         }
-        
-        // Filter by category
-        function filterByCategory(category, tabElement) {
-            // Update active tab
-            document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
-            tabElement.classList.add('active');
-            
-            // Apply filter
+
+        function filterByCategory(category, pillElement) {
+            document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
+            pillElement.classList.add('active');
             applyFilters();
         }
-        
-        // Apply all filters
+
         function applyFilters() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const selectedPeriod = document.getElementById('periodFilter').value;
-            const selectedCategory = document.querySelector('.filter-tab.active').dataset.category;
-            
+            const selectedCategory = document.querySelector('.category-pill.active').dataset.category;
+
             filteredEssays = allEssays.filter(essay => {
-                // Search filter
-                const matchesSearch = !searchTerm || 
+                const matchesSearch = !searchTerm ||
                     essay.title.toLowerCase().includes(searchTerm) ||
                     essay.author.toLowerCase().includes(searchTerm) ||
                     essay.school.toLowerCase().includes(searchTerm) ||
-                    essay.supervisor.toLowerCase().includes(searchTerm);
-                
-                // Period filter (convert both to string for comparison)
+                    (essay.supervisor && essay.supervisor.toLowerCase().includes(searchTerm));
+
                 const matchesPeriod = !selectedPeriod || String(essay.competition_period) === String(selectedPeriod);
-                
-                // Category filter
                 const matchesCategory = !selectedCategory || essay.category === selectedCategory;
-                
+
                 return matchesSearch && matchesPeriod && matchesCategory;
             });
-            
+
             displayEssays();
         }
-        
-        // Display essays
+
         function displayEssays() {
             const container = document.getElementById('essays-list');
             const noResults = document.getElementById('no-results');
-            
+            const resultsCount = document.getElementById('results-count');
+
+            resultsCount.textContent = `顯示 ${filteredEssays.length} 篇作品`;
+
             if (filteredEssays.length === 0) {
                 container.style.display = 'none';
                 noResults.style.display = 'block';
                 return;
             }
-            
-            container.style.display = 'block';
+
+            container.style.display = 'grid';
             noResults.style.display = 'none';
-            
+
             container.innerHTML = filteredEssays.map(essay => `
-                <div class="essay-card">
-                    <div class="essay-title">${essay.title}</div>
+                <article class="essay-card">
+                    <div class="essay-header">
+                        <h3 class="essay-title">${essay.title}</h3>
+                        <span class="category-tag ${essay.category}">${essay.category}</span>
+                    </div>
+                    
                     <div class="essay-meta">
                         <div class="meta-item">
                             <i class="fas fa-user"></i>
-                            <span><strong>作者:</strong> ${essay.author}</span>
+                            <span>${essay.author}</span>
                         </div>
                         ${essay.supervisor ? `
                         <div class="meta-item">
                             <i class="fas fa-chalkboard-teacher"></i>
-                            <span><strong>指導老師:</strong> ${essay.supervisor}</span>
+                            <span>${essay.supervisor}</span>
                         </div>
                         ` : ''}
                         <div class="meta-item">
                             <i class="fas fa-school"></i>
-                            <span><strong>學校:</strong> ${essay.school}</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span><strong>期數:</strong> ${essay.competition_period}</span>
+                            <span>${essay.school}</span>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="category-badge category-${essay.category}">${essay.category}</span>
+                    
+                    <div class="essay-footer">
+                        <span class="period-badge">第 ${essay.competition_period} 期</span>
                         ${essay.pdf_link ? `
-                        <a href="${essay.pdf_link}" target="_blank" class="pdf-link">
+                        <a href="${essay.pdf_link}" target="_blank" class="pdf-btn">
                             <i class="fas fa-file-pdf"></i>
-                            查看PDF
+                            查看 PDF
                         </a>
                         ` : ''}
                     </div>
-                </div>
+                </article>
             `).join('');
         }
-        
+
         // Event listeners
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         document.getElementById('periodFilter').addEventListener('change', applyFilters);
-        
-        // Initialize when page loads
+        document.querySelector('.category-pill').addEventListener('click', function () {
+            document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
+            this.classList.add('active');
+            applyFilters();
+        });
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', loadEssays);
     </script>
 </body>
+
 </html>
