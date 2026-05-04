@@ -36,11 +36,6 @@ class SHSCrawlerFull:
             max_retries: 最大重試次數
         """
         self.base_url = "https://www.shs.edu.tw/Customer/Winning/EssayIndex"
-        self.target_category_ids = {
-            '13': '資訊類',
-            '11': '商業類',
-            '8': '工程技術類'
-        }
         self.headless = headless
         self.max_retries = max_retries
         self.checkpoint_file = "crawler_checkpoint.json"
@@ -79,20 +74,28 @@ class SHSCrawlerFull:
         ''')
         return periods
     
+    @staticmethod
+    def extract_valid_categories(options: list) -> list:
+        """Return every category option that can be selected for crawling."""
+        return [
+            option
+            for option in options
+            if option.get('value') and option.get('text')
+        ]
+    
     async def get_target_categories(self, page) -> list:
-        """獲取目標類別（資訊類、商業類、工程技術類）"""
-        categories = await page.evaluate('''
+        """獲取所有可用類別"""
+        category_options = await page.evaluate('''
             () => {
                 const select = document.querySelector('#cate-id');
                 return Array.from(select.options)
-                    .filter(opt => ['13', '11', '8'].includes(opt.value))
                     .map(opt => ({
                         value: opt.value,
                         text: opt.text.trim()
                     }));
             }
         ''')
-        return categories
+        return self.extract_valid_categories(category_options)
     
     async def search_essays(self, page, period: dict, category: dict) -> bool:
         """執行搜尋"""

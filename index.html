@@ -269,6 +269,8 @@
             font-size: 0.75rem;
             font-weight: 600;
             white-space: nowrap;
+            background: #EEF2FF;
+            color: #4338CA;
         }
 
         .category-tag.資訊類 {
@@ -419,7 +421,7 @@
     <section class="hero">
         <h1 class="hero-title">台灣高中<span>小論文競賽</span>作品集</h1>
         <p class="hero-subtitle">
-            收錄資訊類、商業類、工程技術類特優作品，提供完整 PDF 閱讀連結
+            收錄全類別特優作品，提供完整 PDF 閱讀連結
         </p>
 
         <div class="stats" id="stats">
@@ -503,6 +505,7 @@
 
                 // Update statistics
                 document.getElementById('total-essays').textContent = data.metadata.total_essays;
+                document.getElementById('total-categories').textContent = Object.keys(data.metadata.categories).length;
                 document.getElementById('total-periods').textContent = data.metadata.periods_covered;
 
                 // Setup filters
